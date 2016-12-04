@@ -1,6 +1,6 @@
-function [plane,pt] = fitplane(pts,k,t)
+function [plane,pt,pts] = fitplane(pts,k,t)
     inliers = zeros(k,1);
-    s = size(pts,1);
+    s = size(pts,2);
     ps = zeros(3,k);
     norms = zeros(3,k);
     for i = 1:k
@@ -30,10 +30,11 @@ function [plane,pt] = fitplane(pts,k,t)
     dets = [yy*zz - yz*yz,xx*zz - xz*xz,xx*yy - xy*xy];
     [~,i] = max(dets);
     if i == 1
-        plane = [1,(xz*yz - xy*zz) / dets(1); (xy*yz - xz*yy) / dets(1)];
+        plane = [1;(xz*yz - xy*zz) / dets(1); (xy*yz - xz*yy) / dets(1)];
     elseif i == 2
         plane = [(xz*yz - xy*zz) / dets(2); 1; (xy*xz - yz*xx) / dets(2)];
     else
         plane = [(yz*xy - xz*yy) / dets(3); (xy*xz - yz*xx) / dets(2); 1];
     end
+    plane = plane/norm(plane);
 end
