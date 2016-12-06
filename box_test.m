@@ -4,7 +4,7 @@ files{3} = 0:93;
 prefixes = ['uu_ '; 'um_ '; 'umm_'];
 prefixes = cellstr(prefixes);
 i = 1;
-v = VideoWriter('results2','MPEG-4');
+v = VideoWriter('results','MPEG-4');
 set(v,'FrameRate',2.5);
 open(v);
 for pre = 1:3
@@ -128,12 +128,14 @@ for pre = 1:3
             plot(box_xs,box_ys,'b');
             hold on;
             plot(axs, ays,'c');
+            hold on;
+            text(10,5,imname,'Color','y');
             hold off;
             pause(0.5);
             set(gcf, 'Position', get(0, 'Screensize'));
             frame = getframe(gcf);
             writeVideo(v,frame);
-            close;
+%             close;
             pause(0.5);
             figure();
             imshow(img);
@@ -143,12 +145,14 @@ for pre = 1:3
             plot(axs, ays,'c');
             hold on;
             plot(cube_xs,cube_ys,'r');
+            hold on;
+            text(10,5,imname,'Color','y');
             hold off;
             pause(0.5);
             set(gcf, 'Position', get(0, 'Screensize'));
             frame = getframe(gcf);
             writeVideo(v,frame);
-            close;
+%             close;
             pause(0.5);
             i = i+1;
         catch
@@ -175,6 +179,8 @@ for pre = 1:3
             scatter(pts2D(1,:),pts2D(2,:),[],cast(C,'double')'./255,'.');
             hold on;
             plot(axs, ays,'c');
+            hold on;
+            text(10,5,imname,'Color','y');
             hold off;
             pause(0.5);
             set(gcf, 'Position', get(0, 'Screensize'));
